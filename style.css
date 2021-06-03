@@ -1,0 +1,77 @@
+.map{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.map2{
+    height: 80%;
+    width: 50%;
+    position: relative;
+}
+
+.map3{
+    height: 80%;
+    width: 50%;
+    position: relative;
+}
+.map4{
+    height: 80%;
+    width: 50%;
+    position: relative;
+}
+
+.navbar {
+    background-color: #1F6B75;
+    color: white;
+    border: 0;
+    border-radius: 0;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1F6B75;
+    color: white;
+}
+body {position: relative;}
+.class,h3{
+    margin-left: 20%;
+}
+
+#container #map2{
+    float: left;
+    width: 60%;
+}
+
+#container #map3{
+    float: left;
+    width: 60%;
+    height: 100%;
+}
+
+#container #arrondis{
+    margin-left: 65%;
+}
+
+#container #quartiers{
+    margin-left: 65%;
+}
+#container #qtiers{
+    overflow: auto;
+}
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 2px solid black;
+}
+#qtiers
+{
+overflow: auto;
+}
+ 
