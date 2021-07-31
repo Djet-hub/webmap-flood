@@ -1,6 +1,6 @@
 <?php
     echo'<table class="table" border="2">';
-    echo '<th>Nom Arrondissement</th><th>Nombre habitants</th><th>Superficie</th>';
+    echo '<th>Nom Arrondissement</th><th>Nombre habitants</th><th>Superficie (m2)</th>';
     //Connexion a la base donnees
     try {
         $connexion = new PDO('pgsql:host=localhost; port=5433; dbname=web_map_flood', 'postgres', 'gager2019');
@@ -15,9 +15,9 @@
     $resultset->execute();
     while ($row = $resultset->fetch(PDO::FETCH_ASSOC)) {
         echo"<tr>";
-        echo "<td>".$row['nom_arrond']."</td>";
-        echo "<td>".$row['nbre_hab']."</td>";
-        echo "<td>".$row['superficie']."</td>";
+        echo '<td text-align="center">'.$row['nom_arrond']."</td>";
+        echo '<td text-align="center">'.$row['nbre_hab']."</td>";
+        echo '<td text-align="center">'.$row['superficie']."</td>";
         echo"</tr>";
     }
     $connexion=null;

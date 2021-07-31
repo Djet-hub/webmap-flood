@@ -2,16 +2,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://localhost/webmap-flood/images/logo48.ico">
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!--Openlayers CSS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css" type="text/css">
     <!--Custom CSS-->
     <link rel="stylesheet" type="" href="style.css">
-    <!-- Bootsrap JS
+    <!-- Bootsrap JS-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <!--Openlayers JS-->
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script>
 <title>Geolocaliser Les Inondations</title>
@@ -24,8 +25,8 @@
     <nav class="collapse navbar-collapse" id="olmenu">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="arronddropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Arrondissements</a>
-          <div class="dropdown-menu dropdown-menu-right mb-3" aria-labelledby="arronddropdown">
+          <a class="nav-link dropdown-toggle" href="arrondissement.html" id="arronddropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Arrondissements</a>
+          <div class="dropdown-menu dropdown-menu-right mb-3" id="arronddropdown" aria-labelledby="arronddropdown">
             <a class="dropdown-item" href="arrondissement.html">Les Arrondissements</a>
             <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#"><i class="fa fa-check fa-fw mr-2 fa-lg"></i>1er Arrondissement</a>
@@ -34,44 +35,49 @@
               <a class="dropdown-item" href="#"><i class="fa fa-graduation-cap fa-fw mr-2 fa-lg"></i>4e Arrondissement</a>
           </div>
         </li>
-        <li class="nav-item active"><a class="nav-link" onclick="startDrawing()" href="#">Indiquer Votre Position sur Carte</a></li>
+        <li class="nav-item active"><a class="nav-link" onclick="startDrawing()" href="#">Etes-vous sur une ZARI?</a></li>
         <li class="nav-item"><a class="nav-link" href="zari.html"><i class="fa fa-sitemap mr-1"></i>Zones Inondables</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="quartiers.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quartiers</a>
+          <a class="nav-link dropdown-toggle" href="quartiers.html" id="quartiersdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quartiers</a>
           <div class="dropdown-menu dropdown-menu-right mb-3" id="quartiersdropdown" aria-labelledby="quartiersdropdown">
             <a class="dropdown-item" href="quartiers.html">Les Quartierss</a>
-            <a class="dropdown-item" href="#" id="nbreHbt"><i class="fa fa-github fa-fw mr-2 fa-lg"></i>Habitants Par Quatier</a>
-            <a class="dropdown-item" href="#" id="etablismt"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Etablissements</a>
-            <a class="dropdown-item" href="#" id="sante"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Centres de Sante</a>
-            <a class="dropdown-item" href="#" id="aDeter1"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
-            <a class="dropdown-item" href="#" id="aDeter2"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" id="nbreHbt"><i class="fa fa-github fa-fw mr-2 fa-lg"></i>Habitants Par Quatier</a>
+              <a class="dropdown-item" href="#" id="etablismt"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Etablissements</a>
+              <a class="dropdown-item" href="#" id="sante"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Centres de Sante</a>
+              <a class="dropdown-item" href="#" id="aDeter1"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
+              <a class="dropdown-item" href="#" id="aDeter2"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
           </div>
          </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" action="bdconnect.php" method="POST">
+      <form class="form-inline my-2 my-lg-0" action="getPosition.php" method="POST">
         <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" id="submitresearch" type="submit" value="">Recherche</button>
       </form>
     </nav>
   </header>
-  <div class="h3"><h3>La Ville de Moundou et les zones a risques d'inondation (ZARI, ZARIE, ZARIF, ZARIM)</h3></div>
+      <div class="h3" id="h3"><h3>La Ville de Moundou et les zones à risques d'inondation (ZARI, ZARIE, ZARIF, ZARIM)</h3></div>
       <!--Container-->
       <div class="container-fluid">
           <!--Map-->
         <div class="map" id="map"></div>
       </div>
+      <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer">Fermer</a>
+        <div id="popup-content"></div>
+      </div>
       <!-- Modal for form to saves changes-->
-    <div class="modal fade" id="pointadding" tabindex="-1" aria-labelledby="pointaddingLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="pointaddingLabel">Nouvelle Entree</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
+      <div class="modal fade" id="pointadding" tabindex="-1" aria-labelledby="pointaddingLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="pointaddingLabel">Verifiez votre position</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
                 <label for="userName">Nom et prenom</label>
                 <input type="text" class="form-control" id="userName" aria-describedby="emailHelp" placeholder="Entrer nom">
                 <small id="emailHelp" class="form-text text-muted">Nous ne partagerons pas votre nom.</small>
@@ -111,14 +117,14 @@
                   <option value="guelkol2">Guelkol 2</option>
                 </select>
               </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-primary" onclick="saveDataToDB()">Enregistrer</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <button type="button" class="btn btn-primary" id="envoyer">Envoyer</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
   <script src="main.js"></script>
   <!--Footer-->
   <footer class="footer">&copy; Copyright 2020 DoItAcademy</footer>

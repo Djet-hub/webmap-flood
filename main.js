@@ -80,22 +80,56 @@ var zari = new ol.layer.Tile({
 //Layer group
 var layerArray = [basemapLayer, routes, arrondissements, quartiers, infrastructures, zarie, zarim, zarif, zari];
 
+/**
+ * Elements that make up the popup.
+ */
+  var container = document.getElementById('popup');
+  var content = document.getElementById('popup-content');
+  var closer = document.getElementById('popup-closer');
+  
+  /**
+   * Create an overlay to anchor the popup to the map.
+   */
+   var popup = new ol.Overlay({
+    element: container,
+    autoPan: true,
+    autoPanAnimation:{duration:250}
+  });
+  
 // Initiating map
 var map = new ol.Map({
+    layers: layerArray, 
+    overlays: [popup],
     target: 'map',
-    layers: layerArray,
     view: view
   });
-
-  //Draw source source
-  var drawSource = new ol.source.Vector();
+ 
   //Draw layer
   var drawLayer = new ol.layer.Vector({
       source: drawSource
   });
+  //Draw source source
+  var drawSource = new ol.source.Vector();
   //Add to map
   map.addLayer(drawLayer);
+  
+ /**
+  * Add a click handler to hide the popup.
+  */
+  closer.onclick = function () {
+   popup.setPosition(undefined);
+   closer.blur();
+   return false;
+ };
+//Indicate the position clicked at on map
+map.on('singleclick', function (evt) {
+  var coordinate = evt.coordinate;
+  var hdms = ol.coordinate.toStringHDMS(coordinate);
 
+  content.innerHTML = '<p>Votre position sur carte</p></br>'+hdms;
+  popup.setPosition(coordinate);
+});
+  
   //Initiate a draw interaction
   var draw = new ol.interaction.Draw({
       type: 'Point',
@@ -105,11 +139,12 @@ var map = new ol.Map({
   draw.on('drawstart', function(evt){
     drawSource.clear();
   })
+
   //Event removing draw
   draw.on('drawend', function(evt){
-      clickedCoord = evt.feature.values_.geometry.flatCoordinates;
+      clickedCoord = new ol.proj.transform(evt.feature.values_.geometry.flatCoordinates, 'EPSG:3857', 'EPSG:4326');
       $('#pointadding').modal('show');
-      console.log('click at', evt.feature.values_.geometry.flatCoordinates);
+      console.log('click at', new ol.proj.transform(evt.feature.values_.geometry.flatCoordinates, 'EPSG:3857', 'EPSG:4326'));
       map.removeInteraction(draw);
   });
 
@@ -118,37 +153,52 @@ var map = new ol.Map({
       //Add interaction to map
     map.addInteraction(draw);
   }
-//Save data from form to database
-function saveDataToDB(){
-  var nomPrenom = document.getElementById('userName').value;
-  var quartier = document.getElementById('areaSelect').value;
-  var long = clickedCoord[0];
-  var lat = clickedCoord[1];
-
-  if(nomPrenom != '' && quartier != '' && long != '' && lat != ''){
-    $.ajax({
-      url: 'saveData.php',
-      type:'POST',
-      data:{
-        nPrenom: nomPrenom,
-        nQuartier: quartier,
-        nLong: long,
-        nLat: lat
-      },
-      succcess: function(dataResult){
-        var dataResult = JSON.parse(dataResult);
-        if(dataResult.statusCode == 200){
-          alert('Data added successfully');
+//Event handler pointed on submit button of the modal
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('envoyer')
+      .addEventListener('click', getPosition);
+  });
+  //Function called when clicked on 'envoyer' button
+  function getPosition(){
+      var nomPrenom = document.getElementById('userName').value;
+      var quartier = document.getElementById('areaSelect').value;
+      var long = clickedCoord[0];
+      var lat = clickedCoord[1];
+      if(nomPrenom != '' && quartier != '' && long != '' && lat != ''){
+      $.ajax({
+        url : 'getPosition.php',
+        type : 'GET',
+        dataType : 'json',
+        data:{
+          nPrenom: nomPrenom,
+          nQuartier: quartier,
+          nLong: long,
+          nLat: lat
+          },
+        success : function (data) {
+          console.log(data);
+          if(data['type_zari']==='ZARIE'){
+            content.innerHTML = 'Vous êtes sur une zone à risque d\'inondation élevé avec les caractéristiques suivantes : '+
+                                'Profondeur de submersion (m) : '+data['prof_subm']+', Superficie inondée (m2) : '+data['superficie'];
+          }else if(data['type_zari']==='ZARIM'){
+            content.innerHTML = 'Vous êtes sur une zone à risque d\'inondation moyen avec les caractéristiques suivantes : '+
+            'Profondeur de submersion (m) : '+data['prof_subm']+', Superficie inondée (m2) : '+data['superficie'];
+          }else {
+            content.innerHTML = 'Vous êtes sur une zone à risque d\'inondation faible avec les caractéristiques suivantes : '+
+            'Profondeur de submersion (m) : '+data['prof_subm']+', Superficie inondée (m2) : '+data['superficie'];
+          } 
           $('#pointadding').modal('hide');
-        } else{
-          alert('Something went wrong');
+        },
+        error : function () {
+          content.innerHTML = 'Vous n\'êtes  pas sur une zone à risque d\'inondation';
+          $('#pointadding').modal('hide');
         }
-      }
-    })
-  } else{
-    alert('Fill complete information');
+      });
+    }else{
+      alert('Veuillez renseigner le nom et le quartier');
+    }
   }
-}
+
 //Event on Research
 
  

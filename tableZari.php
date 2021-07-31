@@ -1,6 +1,6 @@
 <?php
     echo'<table class="table" border="2">';
-    echo '<th>Type de ZARI</th><th>Superficie</th><th>Profondeur de submersion</th><th>Quartier Touche</th>';
+    echo '<th>Type de ZARI</th><th>Superficie (m2)</th><th>Profondeur de submersion (m)</th><th>Quartier Touche</th>';
     //Connexion a la base donnees
     try {
         $connexion = new PDO('pgsql:host=localhost; port=5433; dbname=web_map_flood', 'postgres', 'gager2019');
@@ -10,7 +10,7 @@
         echo $e->getMessage(); //Sinon affiche le message d'erreur
     }
     //Interrogation de la base de donnees
-    $sql = 'SELECT type_zari, superficie, prof_subm, quartier FROM quartiers;';
+    $sql = 'SELECT type_zari, superficie, prof_subm, quartier FROM zari;';
     $resultset = $connexion->prepare($sql);
     $resultset->execute();
     while ($row = $resultset->fetch(PDO::FETCH_ASSOC)) {

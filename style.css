@@ -39,7 +39,6 @@ body {position: relative;}
 .class,h3{
     margin-left: 20%;
 }
-
 #container #map2{
     float: left;
     width: 60%;
@@ -51,15 +50,30 @@ body {position: relative;}
     height: 100%;
 }
 
+#container #map4{
+    float: left;
+    width: 60%;
+    height: 100%;
+}
+
 #container #arrondis{
     margin-left: 65%;
 }
 
-#container #quartiers{
+#container #qtiers{
     margin-left: 65%;
 }
+
+#container #zaris{
+    margin-left: 65%;
+}
+
 #container #qtiers{
     overflow: auto;
+}
+#zaris, #qtiers, #arrondis{
+    height:100pt;
+    overflow:auto;
 }
 table
 {
@@ -69,9 +83,72 @@ table
 td, th /* Mettre une bordure sur les td ET les th */
 {
     border: 2px solid black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font: oblique;
 }
 #qtiers
 {
 overflow: auto;
 }
- 
+
+.ol-popup {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+    min-width: 280px;
+  }
+  .ol-popup:after, .ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  .ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+  }
+  .ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+  }
+  .ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+  }
+  .ol-popup-closer:after {
+    content: "✖";
+  }
+  .carousel{
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-right: 10%;
+    margin-left: 10%;
+ }
+ .carousel-inner img{
+     width: 100%;
+     height: 90%;
+ }
+ #item1, #item2, #item3{
+     width: 40px;
+     height: 10px;
+ }
+ #containercarousel{
+     background-color: lightgrey;
+ }
+  
+
+  

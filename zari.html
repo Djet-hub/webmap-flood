@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="http://localhost/webmap-flood/images/logo48.ico">
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!--Openlayers CSS-->
@@ -26,7 +27,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="arronddropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Arrondissements</a>
           <div class="dropdown-menu dropdown-menu-right mb-3" aria-labelledby="arronddropdown">
-            <a class="dropdown-item" href="#">Zones Inondables</a>
+            <a class="dropdown-item" href="#">Arrondissements</a>
             <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#"><i class="fa fa-check fa-fw mr-2 fa-lg"></i>1er Arrondissement</a>
               <a class="dropdown-item" href="#"><i class="fa fa-question fa-fw mr-2 fa-lg"></i>2e Arrondissement</a>
@@ -34,16 +35,18 @@
               <a class="dropdown-item" href="#"><i class="fa fa-graduation-cap fa-fw mr-2 fa-lg"></i>4e Arrondissement</a>
           </div>
         </li>
-        <li class="nav-item active"><a class="nav-link" onclick="startDrawing()" href="#">Indiquer Votre Position sur Carte</a></li>
+        <li class="nav-item active"><a class="nav-link" onclick="startDrawing()" href="#">Etes-vous sur une ZARI?</a></li>
         <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sitemap mr-1"></i>Generalites</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quartiers</a>
           <div class="dropdown-menu dropdown-menu-right mb-3" id="quartiersdropdown" aria-labelledby="quartiersdropdown">
-            <a class="dropdown-item" href="#" id="nbreHbt"><i class="fa fa-github fa-fw mr-2 fa-lg"></i>Habitants Par Quatier</a>
-            <a class="dropdown-item" href="#" id="etablismt"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Etablissements</a>
-            <a class="dropdown-item" href="#" id="sante"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Centres de Sante</a>
-            <a class="dropdown-item" href="#" id="aDeter1"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
-            <a class="dropdown-item" href="#" id="aDeter2"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
+            <a class="dropdown-item" href="#">Quartiers</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" id="nbreHbt"><i class="fa fa-github fa-fw mr-2 fa-lg"></i>Habitants Par Quatier</a>
+              <a class="dropdown-item" href="#" id="etablismt"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Etablissements</a>
+              <a class="dropdown-item" href="#" id="sante"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>Centres de Sante</a>
+              <a class="dropdown-item" href="#" id="aDeter1"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
+              <a class="dropdown-item" href="#" id="aDeter2"><i class="fa fa-download fa-fw mr-2 fa-lg"></i>A Determiner</a>
           </div>
          </li>
       </ul>
